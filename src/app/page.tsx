@@ -1,527 +1,471 @@
 import Image from "next/image";
-import Link from "next/link";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import GalleryCarousel from "@/components/GalleryCarousel";
-import ScrollAnimator from "@/components/ScrollAnimator";
 
-const services = [
-  {
-    name: "Communication animale",
-    icon: "◈",
-    description:
-      "Séances de communication intuitive avec les animaux, vivants ou défunts, pour mieux comprendre leurs besoins et renforcer le lien avec leur maître.",
-    accent: "#a8c5a0",
-  },
-  {
-    name: "Soins énergétiques",
-    icon: "✦",
-    description:
-      "Soins de bien-être énergétique proposés aux animaux pour rétablir leur équilibre intérieur et soutenir leur vitalité.",
-    accent: "#7aab70",
-  },
-  {
-    name: "Fleurs de Bach",
-    icon: "❋",
-    description:
-      "Utilisation des élixirs floraux de Bach pour accompagner les animaux et leurs propriétaires sur le plan émotionnel.",
-    accent: "#c9a96e",
-  },
-  {
-    name: "Pension familiale",
-    icon: "⌂",
-    description:
-      "Accueil des animaux dans un cadre familial et bienveillant durant l'absence de leurs maîtres.",
-    accent: "#a8c5a0",
-  },
-  {
-    name: "Stages",
-    icon: "◇",
-    description:
-      "Stages autour de la communication animale et du développement personnel pour approfondir votre lien avec le vivant.",
-    accent: "#7aab70",
-  },
-  {
-    name: "Bon cadeau",
-    icon: "♡",
-    description:
-      "Bon cadeau disponible pour offrir les services proposés à ceux qui vous sont chers.",
-    accent: "#c9a96e",
-  },
-];
-
-export default function HomePage() {
+export default function Home() {
   return (
-    <>
-      <ScrollAnimator />
-      <Navigation activePage="/" />
+    <main className="overflow-x-hidden">
+      <Navigation activePage="accueil" />
 
-      {/* ═══════════════════════════════════════════
-          HERO
-      ═══════════════════════════════════════════ */}
-      <section className="relative min-h-screen flex items-end overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0">
+      {/* ── HERO ── */}
+      <section className="relative min-h-screen flex items-end pb-20 overflow-hidden">
+        {/* Full-bleed image */}
+        <div className="absolute inset-0 z-0">
           <Image
             src="/assets/hero.jpg"
-            alt="Julie Decoly — Pension animalière"
+            alt="Julie Decoly pension animalière"
             fill
             priority
             className="object-cover object-center"
-            sizes="100vw"
           />
-          <div className="hero-overlay absolute inset-0" />
-          {/* Additional soft green tint at top */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(160deg, rgba(45,74,45,0.25) 0%, transparent 50%)",
-            }}
-          />
+          {/* Gradient overlays */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#1a1208]/80 via-[#1a1208]/20 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#1a1208]/40 via-transparent to-transparent" />
         </div>
 
-        {/* Floating decorative elements */}
-        <div
-          className="absolute top-1/4 right-16 text-[#a8c5a0]/30 text-6xl floating-leaf select-none hidden lg:block"
-          aria-hidden="true"
-        >
-          ✿
-        </div>
-        <div
-          className="absolute top-1/3 right-32 text-[#c8ddc4]/20 text-3xl floating-leaf select-none hidden lg:block"
-          style={{ animationDelay: "2s" }}
-          aria-hidden="true"
-        >
-          ❋
+        {/* Decorative botanical circle */}
+        <div className="absolute top-1/4 right-12 w-64 h-64 opacity-20 rotate-slow pointer-events-none z-10 hidden lg:block">
+          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="none">
+            <circle cx="100" cy="100" r="95" stroke="#7B9E87" strokeWidth="0.5" />
+            <circle cx="100" cy="100" r="80" stroke="#C9A84C" strokeWidth="0.3" strokeDasharray="4 8" />
+            {[0, 45, 90, 135, 180, 225, 270, 315].map((angle, i) => (
+              <g key={i} transform={`rotate(${angle}, 100, 100)`}>
+                <path
+                  d="M100 10 C90 30 85 50 100 60 C115 50 110 30 100 10Z"
+                  fill="#7B9E87"
+                  opacity="0.6"
+                />
+              </g>
+            ))}
+          </svg>
         </div>
 
-        {/* Hero Content */}
-        <div className="relative z-10 w-full max-w-6xl mx-auto px-6 pb-24 md:pb-32">
-          <div className="max-w-3xl">
-            <p
-              className="text-[#7aab70] text-sm tracking-[0.4em] uppercase mb-6 opacity-0 animate-[fadeInUp_0.8s_0.2s_forwards]"
-              style={{
-                fontFamily: "var(--font-jost), sans-serif",
-                fontWeight: 400,
-                animation: "fadeInUp 0.8s 0.2s cubic-bezier(0.16,1,0.3,1) forwards",
-              }}
+        {/* Hero content */}
+        <div className="relative z-20 w-full max-w-7xl mx-auto px-6 lg:px-16">
+          <div className="max-w-2xl">
+            <span
+              className="inline-block text-[#A8C4B0] tracking-[0.35em] text-xs uppercase mb-6 font-light"
+              style={{ fontFamily: "var(--font-jost)" }}
             >
-              Pension Animalière & Bien-être
-            </p>
+              Pension Animalière Familiale
+            </span>
+
             <h1
-              className="hero-text-shadow mb-6 opacity-0"
-              style={{
-                fontFamily: "var(--font-cormorant), serif",
-                fontWeight: 300,
-                fontSize: "clamp(3.5rem, 8vw, 7rem)",
-                lineHeight: 1.05,
-                color: "#2d4a2d",
-                animation: "fadeInUp 1s 0.4s cubic-bezier(0.16,1,0.3,1) forwards",
-              }}
+              className="text-[clamp(3.5rem,8vw,7rem)] leading-[0.92] font-light text-[#FDFAF5] mb-2"
+              style={{ fontFamily: "var(--font-cormorant)" }}
             >
-              L&apos;âme
+              Julie
               <br />
-              <em
-                style={{
-                  fontStyle: "italic",
-                  color: "#2d4a2d",
-                }}
-              >
-                de vos animaux
-              </em>
-              <br />
-              <span
-                style={{
-                  color: "#7aab70",
-                }}
-              >
-                en bonnes mains
-              </span>
+              <em className="italic text-[#A8C4B0]">Decoly</em>
             </h1>
+
+            <div className="w-16 h-[1px] bg-gradient-to-r from-[#7B9E87] to-[#C9A84C] my-8" />
+
             <p
-              className="text-[#3d5c3d] text-lg md:text-xl leading-relaxed max-w-xl mb-10 opacity-0"
-              style={{
-                fontFamily: "var(--font-jost), sans-serif",
-                fontWeight: 300,
-                animation: "fadeInUp 1s 0.6s cubic-bezier(0.16,1,0.3,1) forwards",
-              }}
+              className="text-[#E8DDD0] text-lg leading-relaxed max-w-md font-light mb-10"
+              style={{ fontFamily: "var(--font-jost)" }}
             >
-              Pension familiale, communication intuitive, soins énergétiques et Fleurs de Bach — une approche holistique pour le bien-être de vos compagnons.
+              Un lieu où les animaux sont accueillis avec amour — pension familiale, 
+              communication animale, soins énergétiques et Fleurs de Bach.
             </p>
-            <div
-              className="flex flex-wrap gap-4 opacity-0"
-              style={{
-                animation: "fadeInUp 1s 0.8s cubic-bezier(0.16,1,0.3,1) forwards",
-              }}
-            >
-              <Link
-                href="https://www.juliedecoly.com/contact"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-[#2d4a2d] text-[#c8ddc4] px-8 py-4 rounded-full hover:bg-[#a8c5a0] hover:text-[#2d4a2d] transition-all duration-500 text-sm tracking-[0.15em] uppercase"
-                style={{ fontFamily: "var(--font-jost), sans-serif", fontWeight: 500 }}
-              >
-                Prendre Rendez-vous
-                <span className="text-base">→</span>
-              </Link>
-              <Link
+
+            <div className="flex flex-wrap gap-4">
+              <a
                 href="/services"
-                className="inline-flex items-center gap-2 border border-[#a8c5a0] text-[#2d4a2d] px-8 py-4 rounded-full hover:bg-[#a8c5a0]/20 transition-all duration-500 text-sm tracking-[0.15em] uppercase"
-                style={{ fontFamily: "var(--font-jost), sans-serif", fontWeight: 500 }}
+                className="group inline-flex items-center gap-3 bg-[#7B9E87] hover:bg-[#5A7A65] text-[#FDFAF5] px-8 py-4 text-sm tracking-widest uppercase transition-all duration-300"
+                style={{ fontFamily: "var(--font-jost)" }}
               >
                 Découvrir les services
-              </Link>
+                <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
+              </a>
+              <a
+                href="#about"
+                className="inline-flex items-center gap-3 border border-[#A8C4B0]/50 hover:border-[#A8C4B0] text-[#E8DDD0] hover:text-white px-8 py-4 text-sm tracking-widest uppercase transition-all duration-300"
+                style={{ fontFamily: "var(--font-jost)" }}
+              >
+                En savoir plus
+              </a>
             </div>
+          </div>
+
+          {/* Floating stats */}
+          <div className="absolute bottom-8 right-6 lg:right-16 hidden md:flex flex-col gap-1 text-right">
+            <span className="text-[#A8C4B0]/60 text-xs tracking-widest uppercase" style={{ fontFamily: "var(--font-jost)" }}>
+              Approche holistique
+            </span>
+            <span className="text-[#FDFAF5]/30 text-xs" style={{ fontFamily: "var(--font-jost)" }}>
+              Pension · Communication · Soins · Bien-être
+            </span>
           </div>
         </div>
 
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-60">
-          <span
-            className="text-[#2d4a2d] text-xs tracking-[0.3em] uppercase"
-            style={{ fontFamily: "var(--font-jost), sans-serif", fontWeight: 300 }}
-          >
-            Découvrir
-          </span>
-          <div className="scroll-indicator text-[#a8c5a0] text-lg">↓</div>
+        {/* Scroll indicator */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2">
+          <span className="text-[#A8C4B0]/50 text-[10px] tracking-widest uppercase rotate-90 mb-6" style={{ fontFamily: "var(--font-jost)" }}>Scroll</span>
+          <div className="w-[1px] h-12 bg-gradient-to-b from-[#7B9E87]/50 to-transparent" />
         </div>
       </section>
 
-      {/* Keyframes via style tag workaround — inline style on elements above handles it */}
-      
-
-      {/* ═══════════════════════════════════════════
-          INTRO STRIP
-      ═══════════════════════════════════════════ */}
-      <section className="bg-[#a8c5a0] py-5 overflow-hidden">
-        <div className="flex gap-12 items-center animate-[marquee_20s_linear_infinite] whitespace-nowrap" style={{ animation: "marquee 25s linear infinite" }}>
-          {Array.from({ length: 8 }).map((_, i) => (
+      {/* ── PHILOSOPHY STRIP ── */}
+      <section className="bg-[#7B9E87] py-6 overflow-hidden">
+        <div className="flex items-center gap-12 animate-[marquee_20s_linear_infinite] whitespace-nowrap">
+          {[
+            "Pension Familiale",
+            "✦",
+            "Communication Animale",
+            "✦",
+            "Soins Énergétiques",
+            "✦",
+            "Fleurs de Bach",
+            "✦",
+            "Bien-être Animal",
+            "✦",
+            "Développement Personnel",
+            "✦",
+            "Pension Familiale",
+            "✦",
+            "Communication Animale",
+            "✦",
+            "Soins Énergétiques",
+            "✦",
+            "Fleurs de Bach",
+            "✦",
+          ].map((item, i) => (
             <span
               key={i}
-              className="text-[#2d4a2d]/70 text-xs tracking-[0.4em] uppercase shrink-0"
-              style={{ fontFamily: "var(--font-jost), sans-serif", fontWeight: 400 }}
+              className={`text-[#FDFAF5] text-sm tracking-widest uppercase ${item === "✦" ? "text-[#E8D5A3]" : ""}`}
+              style={{ fontFamily: "var(--font-jost)" }}
             >
-              Communication Animale ✦ Soins Énergétiques ✦ Fleurs de Bach ✦ Pension Familiale ✦ Stages &nbsp;
+              {item}
             </span>
           ))}
         </div>
         
       </section>
 
-      {/* ═══════════════════════════════════════════
-          ABOUT / STORY
-      ═══════════════════════════════════════════ */}
-      <section className="py-28 md:py-36 bg-[#faf8f5] overflow-hidden">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="grid md:grid-cols-2 gap-16 lg:gap-24 items-center">
-            {/* Image */}
+      {/* ── ABOUT ── */}
+      <section id="about" className="gradient-mesh py-32 lg:py-40">
+        <div className="max-w-7xl mx-auto px-6 lg:px-16">
+          <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+            {/* Image column */}
             <div data-animate="fade-left" className="relative">
-              <div
-                className="relative organic-shape overflow-hidden w-full aspect-[4/5]"
-                style={{ boxShadow: "0 32px 80px rgba(45,74,45,0.18)" }}
-              >
+              {/* Background shape */}
+              <div className="absolute -top-8 -left-8 w-64 h-64 bg-[#7B9E87]/10 organic-blob" />
+              <div className="absolute -bottom-6 -right-6 w-48 h-48 bg-[#C9A84C]/10 organic-blob-2" />
+
+              {/* Main image */}
+              <div className="relative z-10 aspect-[4/5] overflow-hidden organic-blob shadow-2xl">
                 <Image
-                  src="/assets/about.jpg"
-                  alt="Julie Decoly avec des animaux"
+                  src="/assets/hero.jpg"
+                  alt="Julie Decoly"
                   fill
                   className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
-                {/* Fallback gradient if image doesn't exist */}
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    background:
-                      "linear-gradient(135deg, rgba(168,197,160,0.3), rgba(122,171,112,0.1))",
-                  }}
-                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#3D2E1E]/30 to-transparent" />
               </div>
-              {/* Decorative element */}
-              <div
-                className="absolute -bottom-8 -right-8 w-40 h-40 organic-shape-2 border-2 border-[#a8c5a0]/40 z-[-1]"
-                aria-hidden="true"
-              />
-              <div
-                className="absolute -top-6 -left-6 text-[#a8c5a0] text-5xl floating-leaf"
-                aria-hidden="true"
-              >
-                ✿
-              </div>
+
+              {/* Decorative frame */}
+              <div className="absolute -bottom-4 -right-4 w-40 h-40 border border-[#7B9E87]/30 rounded-full z-0" />
+              <div className="absolute -bottom-8 -right-8 w-40 h-40 border border-[#C9A84C]/20 rounded-full z-0" />
+
               {/* Badge */}
-              <div
-                className="absolute bottom-8 -right-4 md:-right-10 bg-[#2d4a2d] text-[#c8ddc4] px-5 py-4 rounded-2xl text-center shadow-xl"
-                style={{ fontFamily: "var(--font-cormorant), serif" }}
-              >
-                <p className="text-3xl font-light leading-none">✦</p>
-                <p
-                  className="text-xs tracking-widest uppercase mt-1"
-                  style={{ fontFamily: "var(--font-jost), sans-serif", fontWeight: 300 }}
-                >
-                  Approche
-                </p>
-                <p
-                  className="text-xs tracking-widest uppercase"
-                  style={{ fontFamily: "var(--font-jost), sans-serif", fontWeight: 300 }}
-                >
-                  Holistique
-                </p>
+              <div className="absolute top-8 -right-4 z-20 bg-[#FDFAF5] shadow-xl px-6 py-4 float-slow">
+                <p className="text-[#7B9E87] text-xs tracking-widest uppercase mb-1" style={{ fontFamily: "var(--font-jost)" }}>Praticienne</p>
+                <p className="text-[#3D2E1E] text-sm font-medium" style={{ fontFamily: "var(--font-cormorant)" }}>Holistique</p>
               </div>
             </div>
 
-            {/* Text */}
-            <div className="space-y-8">
-              <div data-animate>
-                <p
-                  className="text-[#7aab70] text-xs tracking-[0.4em] uppercase mb-3"
-                  style={{ fontFamily: "var(--font-jost), sans-serif", fontWeight: 400 }}
-                >
-                  Mon approche
-                </p>
-                <h2
-                  className="text-[#2d4a2d] leading-tight"
-                  style={{
-                    fontFamily: "var(--font-cormorant), serif",
-                    fontWeight: 300,
-                    fontSize: "clamp(2.5rem, 5vw, 4rem)",
-                  }}
-                >
-                  Un lien profond
-                  <br />
-                  <em>avec le vivant</em>
-                </h2>
+            {/* Text column */}
+            <div>
+              <div data-animate data-delay="100">
+                <span className="text-[#7B9E87] tracking-[0.3em] text-xs uppercase" style={{ fontFamily: "var(--font-jost)" }}>
+                  À propos
+                </span>
               </div>
 
-              <div data-animate className="delay-2 space-y-5">
-                <p
-                  className="text-[#4a6b4a] leading-relaxed text-base"
-                  style={{ fontFamily: "var(--font-jost), sans-serif", fontWeight: 300 }}
-                >
-                  Je suis Julie Decoly, et ma passion pour les animaux m&apos;a conduite vers une approche holistique de leur bien-être. Ma pension animalière n&apos;est pas un simple lieu de garde : c&apos;est un sanctuaire où chaque animal est accueilli avec amour et attention.
-                </p>
-                <p
-                  className="text-[#4a6b4a] leading-relaxed text-base"
-                  style={{ fontFamily: "var(--font-jost), sans-serif", fontWeight: 300 }}
-                >
-                  En combinant la garde familiale avec des pratiques de communication intuitive, de soins énergétiques et des Fleurs de Bach, j&apos;accompagne vos compagnons vers un équilibre profond — corps, émotions et esprit.
-                </p>
-              </div>
+              <h2
+                data-animate data-delay="200"
+                className="text-[clamp(2.5rem,4vw,4rem)] font-light leading-tight mt-4 mb-6 text-[#3D2E1E]"
+                style={{ fontFamily: "var(--font-cormorant)" }}
+              >
+                Une approche
+                <br />
+                <em className="italic text-[#7B9E87]">du cœur</em>
+              </h2>
 
-              <div data-animate className="delay-3">
-                <div className="petal-border p-6 rounded-2xl bg-[#f0f7ee]">
-                  <p
-                    className="text-[#2d4a2d] text-xl md:text-2xl leading-relaxed italic"
-                    style={{ fontFamily: "var(--font-cormorant), serif", fontWeight: 400 }}
-                  >
-                    &ldquo;Chaque animal porte en lui une sagesse unique. Mon rôle est d&apos;écouter et de transmettre.&rdquo;
-                  </p>
-                  <p
-                    className="text-[#7aab70] text-sm mt-3"
-                    style={{ fontFamily: "var(--font-jost), sans-serif", fontWeight: 400 }}
-                  >
-                    — Julie Decoly
-                  </p>
-                </div>
-              </div>
+              <div className="w-10 h-[1px] bg-gradient-to-r from-[#7B9E87] to-[#C9A84C] mb-8" data-animate data-delay="200" />
 
-              <div data-animate className="delay-4">
-                <Link
-                  href="/services"
-                  className="inline-flex items-center gap-3 text-[#2d4a2d] hover:text-[#7aab70] transition-colors group"
-                  style={{ fontFamily: "var(--font-jost), sans-serif", fontWeight: 500, letterSpacing: "0.1em" }}
-                >
-                  <span className="text-sm uppercase tracking-widest">Explorer mes services</span>
-                  <span className="w-8 h-px bg-current group-hover:w-14 transition-all duration-500" />
-                  <span className="text-sm">→</span>
-                </Link>
+              <p
+                data-animate data-delay="300"
+                className="text-[#6B5240] leading-relaxed mb-6 text-lg"
+                style={{ fontFamily: "var(--font-jost)", fontWeight: 300 }}
+              >
+                Julie Decoly est une praticienne spécialisée en communication animale, soins 
+                énergétiques et Fleurs de Bach. Elle accueille également les animaux dans le 
+                cadre d'une pension animalière à caractère familial, offrant un environnement 
+                chaleureux et bienveillant.
+              </p>
+
+              <p
+                data-animate data-delay="400"
+                className="text-[#6B5240] leading-relaxed mb-10 text-lg"
+                style={{ fontFamily: "var(--font-jost)", fontWeight: 300 }}
+              >
+                Sa pratique unique allie plusieurs disciplines complémentaires au service 
+                du bien-être animal, intégrant le développement personnel dans la relation 
+                humain-animal.
+              </p>
+
+              {/* USPs */}
+              <div data-animate data-delay="500" className="grid grid-cols-1 gap-4">
+                {[
+                  { icon: "🌿", text: "Approche holistique et personnalisée" },
+                  { icon: "✨", text: "Communication avec animaux vivants ou défunts" },
+                  { icon: "🌸", text: "Élixirs floraux de Bach adaptés aux animaux" },
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-4">
+                    <span className="text-lg">{item.icon}</span>
+                    <span className="text-[#6B5240] text-sm" style={{ fontFamily: "var(--font-jost)" }}>
+                      {item.text}
+                    </span>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════
-          SERVICES
-      ═══════════════════════════════════════════ */}
-      <section className="py-28 md:py-36 bg-[#f0f7ee] relative overflow-hidden">
-        {/* Background decoration */}
-        <div
-          className="absolute top-0 right-0 w-[500px] h-[500px] opacity-30"
-          style={{
-            background: "radial-gradient(ellipse, rgba(168,197,160,0.4), transparent 70%)",
-            transform: "translate(20%, -20%)",
-          }}
-          aria-hidden="true"
-        />
-        <div
-          className="absolute bottom-0 left-0 w-[400px] h-[400px] opacity-20"
-          style={{
-            background: "radial-gradient(ellipse, rgba(122,171,112,0.3), transparent 70%)",
-            transform: "translate(-20%, 20%)",
-          }}
-          aria-hidden="true"
-        />
+      {/* ── SERVICES PREVIEW ── */}
+      <section className="py-32 lg:py-40 bg-[#3D2E1E] relative overflow-hidden">
+        {/* Background pattern */}
+        <div className="absolute inset-0 leaf-pattern opacity-50" />
+        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#7B9E87]/30 to-transparent" />
+        <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#7B9E87]/30 to-transparent" />
 
-        <div className="max-w-6xl mx-auto px-6 relative z-10">
-          {/* Section Header */}
-          <div className="text-center mb-20" data-animate>
-            <p
-              className="text-[#7aab70] text-xs tracking-[0.4em] uppercase mb-4"
-              style={{ fontFamily: "var(--font-jost), sans-serif", fontWeight: 400 }}
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-16">
+          <div className="text-center mb-20">
+            <span
+              data-animate
+              className="text-[#A8C4B0] tracking-[0.35em] text-xs uppercase"
+              style={{ fontFamily: "var(--font-jost)" }}
             >
               Ce que je propose
-            </p>
+            </span>
             <h2
-              className="text-[#2d4a2d]"
-              style={{
-                fontFamily: "var(--font-cormorant), serif",
-                fontWeight: 300,
-                fontSize: "clamp(2.5rem, 5vw, 4.5rem)",
-                lineHeight: 1.1,
-              }}
+              data-animate data-delay="200"
+              className="text-[clamp(2.5rem,5vw,4.5rem)] font-light text-[#F5F0E8] mt-4 leading-tight"
+              style={{ fontFamily: "var(--font-cormorant)" }}
             >
-              Mes <em>Services</em>
+              Mes <em className="italic text-[#A8C4B0]">Services</em>
             </h2>
-            <div className="leaf-divider mt-8 max-w-xs mx-auto">
-              <span className="text-[#a8c5a0] text-sm">✦</span>
-            </div>
           </div>
 
-          {/* Services Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {services.map((service, i) => (
+            {[
+              {
+                name: "Pension Animalière Familiale",
+                description: "Accueil des animaux dans un cadre familial et bienveillant pendant l'absence de leurs propriétaires.",
+                icon: "🏡",
+                num: "01",
+              },
+              {
+                name: "Communication Animale",
+                description: "Séances de communication intuitive avec les animaux, vivants ou défunts, pour comprendre leurs ressentis, besoins et messages.",
+                icon: "🔮",
+                num: "02",
+              },
+              {
+                name: "Soins Énergétiques",
+                description: "Soins énergétiques proposés aux animaux pour favoriser leur bien-être physique et émotionnel.",
+                icon: "✨",
+                num: "03",
+              },
+              {
+                name: "Fleurs de Bach",
+                description: "Préparation et utilisation des élixirs floraux de Bach adaptés aux animaux pour rééquilibrer leurs états émotionnels.",
+                icon: "🌸",
+                num: "04",
+              },
+              {
+                name: "Stages",
+                description: "Stages de formation ou d'initiation à la communication animale et au développement personnel en lien avec les animaux.",
+                icon: "🌱",
+                num: "05",
+              },
+              {
+                name: "Bon Cadeau",
+                description: "Bons cadeaux disponibles pour offrir une séance ou un service à un proche.",
+                icon: "🎁",
+                num: "06",
+              },
+            ].map((service, i) => (
               <div
-                key={service.name}
+                key={i}
                 data-animate
-                className={`delay-${(i % 3) + 1} service-card bg-[#faf8f5] rounded-3xl p-8 border border-[#a8c5a0]/20`}
+                data-delay={`${(i % 3) * 100 + 100}`}
+                className="card-hover group relative bg-[#2A1F12]/60 border border-[#7B9E87]/15 p-8 cursor-pointer"
               >
-                <div className="mb-6">
-                  <span
-                    className="text-4xl"
-                    style={{ color: service.accent }}
-                  >
-                    {service.icon}
-                  </span>
-                </div>
+                <span className="service-number">{service.num}</span>
+                <span className="text-2xl mb-4 block">{service.icon}</span>
                 <h3
-                  className="text-[#2d4a2d] mb-3 text-xl"
-                  style={{
-                    fontFamily: "var(--font-cormorant), serif",
-                    fontWeight: 500,
-                    fontSize: "1.35rem",
-                  }}
+                  className="text-xl font-medium text-[#F5F0E8] mb-3 group-hover:text-[#A8C4B0] transition-colors duration-300"
+                  style={{ fontFamily: "var(--font-cormorant)" }}
                 >
                   {service.name}
                 </h3>
+                <div className="w-8 h-[1px] bg-[#7B9E87]/40 mb-4 group-hover:w-16 transition-all duration-500" />
                 <p
-                  className="text-[#5a7a5a] leading-relaxed text-sm"
-                  style={{ fontFamily: "var(--font-jost), sans-serif", fontWeight: 300, lineHeight: 1.8 }}
+                  className="text-[#A8946E]/80 text-sm leading-relaxed"
+                  style={{ fontFamily: "var(--font-jost)", fontWeight: 300 }}
                 >
                   {service.description}
                 </p>
-                <div
-                  className="mt-6 h-0.5 w-10 rounded-full"
-                  style={{ backgroundColor: service.accent }}
-                />
               </div>
             ))}
           </div>
 
-          <div className="text-center mt-16" data-animate>
-            <Link
-              href="https://www.juliedecoly.com/contact"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-[#2d4a2d] text-[#c8ddc4] px-10 py-4 rounded-full hover:bg-[#a8c5a0] hover:text-[#2d4a2d] transition-all duration-500 text-sm tracking-[0.2em] uppercase shadow-lg hover:shadow-xl"
-              style={{ fontFamily: "var(--font-jost), sans-serif", fontWeight: 500 }}
+          <div data-animate data-delay="300" className="text-center mt-14">
+            <a
+              href="/services"
+              className="group inline-flex items-center gap-3 border border-[#7B9E87]/50 hover:border-[#7B9E87] text-[#A8C4B0] hover:text-[#FDFAF5] px-10 py-4 text-sm tracking-widest uppercase transition-all duration-300"
+              style={{ fontFamily: "var(--font-jost)" }}
             >
-              Réserver une séance
-            </Link>
+              Voir tous les services
+              <span className="group-hover:translate-x-2 transition-transform duration-300">→</span>
+            </a>
           </div>
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════
-          GALLERY
-      ═══════════════════════════════════════════ */}
-      <section className="py-28 md:py-36 bg-[#faf8f5]">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
-            <div data-animate>
-              <p
-                className="text-[#7aab70] text-xs tracking-[0.4em] uppercase mb-4"
-                style={{ fontFamily: "var(--font-jost), sans-serif", fontWeight: 400 }}
+      {/* ── GALLERY ── */}
+      <section className="py-24 bg-[#F5F0E8]">
+        <div className="max-w-7xl mx-auto px-6 lg:px-16 mb-12">
+          <div className="flex items-end justify-between">
+            <div>
+              <span
+                data-animate
+                className="text-[#7B9E87] tracking-[0.3em] text-xs uppercase"
+                style={{ fontFamily: "var(--font-jost)" }}
               >
-                En images
-              </p>
+                Galerie
+              </span>
               <h2
-                className="text-[#2d4a2d]"
-                style={{
-                  fontFamily: "var(--font-cormorant), serif",
-                  fontWeight: 300,
-                  fontSize: "clamp(2rem, 4vw, 3.5rem)",
-                  lineHeight: 1.1,
-                }}
+                data-animate data-delay="200"
+                className="text-[clamp(2rem,4vw,3.5rem)] font-light text-[#3D2E1E] mt-3 leading-tight"
+                style={{ fontFamily: "var(--font-cormorant)" }}
               >
-                La vie à
+                Moments de
                 <br />
-                <em>la pension</em>
+                <em className="italic text-[#7B9E87]">bonheur partagé</em>
               </h2>
             </div>
-            <div data-animate="fade-right" className="max-w-xs">
-              <p
-                className="text-[#5a7a5a] text-sm leading-relaxed"
-                style={{ fontFamily: "var(--font-jost), sans-serif", fontWeight: 300 }}
-              >
-                Un cadre naturel et chaleureux où vos animaux se sentent chez eux, entourés de soins et d&apos;amour.
-              </p>
+            <div data-animate data-delay="300" className="hidden md:flex items-center gap-2 text-[#6B5240] text-sm pb-2" style={{ fontFamily: "var(--font-jost)", fontWeight: 300 }}>
+              <span>Glisser pour explorer</span>
+              <span className="text-[#7B9E87]">→</span>
             </div>
           </div>
+        </div>
+        <GalleryCarousel />
+      </section>
 
-          <div data-animate="scale">
-            <GalleryCarousel />
+      {/* ── QUOTE SECTION ── */}
+      <section className="py-32 bg-[#7B9E87] relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-[#5A7A65] rounded-full blur-3xl opacity-40 -translate-y-1/2 translate-x-1/2" />
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#4A6741] rounded-full blur-3xl opacity-30 translate-y-1/2 -translate-x-1/2" />
+
+        <div className="relative z-10 max-w-4xl mx-auto px-6 lg:px-16 text-center">
+          <div data-animate className="text-[#E8D5A3] text-6xl mb-8 float-slow" style={{ fontFamily: "var(--font-cormorant)" }}>"</div>
+          <blockquote
+            data-animate data-delay="200"
+            className="text-[clamp(1.5rem,3vw,2.5rem)] font-light text-[#FDFAF5] leading-relaxed mb-8"
+            style={{ fontFamily: "var(--font-cormorant)", fontStyle: "italic" }}
+          >
+            Les animaux sont des êtres sensibles et intelligents. 
+            Ils ont des messages à nous transmettre, des émotions à partager.
+          </blockquote>
+          <div data-animate data-delay="300" className="flex items-center justify-center gap-4">
+            <div className="h-[1px] w-12 bg-[#E8D5A3]/50" />
+            <span className="text-[#E8D5A3] text-sm tracking-widest uppercase" style={{ fontFamily: "var(--font-jost)" }}>
+              Julie Decoly
+            </span>
+            <div className="h-[1px] w-12 bg-[#E8D5A3]/50" />
           </div>
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════
-          VALUES STRIP
-      ═══════════════════════════════════════════ */}
-      <section className="py-20 bg-[#2d4a2d] relative overflow-hidden">
-        <div
-          className="absolute inset-0 opacity-5"
-          style={{
-            backgroundImage:
-              "repeating-linear-gradient(45deg, #a8c5a0 0, #a8c5a0 1px, transparent 0, transparent 50%)",
-            backgroundSize: "20px 20px",
-          }}
-          aria-hidden="true"
-        />
-        <div className="max-w-6xl mx-auto px-6 relative z-10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+      {/* ── HOLISTIC APPROACH ── */}
+      <section className="py-32 lg:py-40 gradient-mesh">
+        <div className="max-w-7xl mx-auto px-6 lg:px-16">
+          <div className="text-center mb-20">
+            <span
+              data-animate
+              className="text-[#7B9E87] tracking-[0.3em] text-xs uppercase"
+              style={{ fontFamily: "var(--font-jost)" }}
+            >
+              La différence Julie Decoly
+            </span>
+            <h2
+              data-animate data-delay="200"
+              className="text-[clamp(2rem,4vw,4rem)] font-light text-[#3D2E1E] mt-4 leading-tight"
+              style={{ fontFamily: "var(--font-cormorant)" }}
+            >
+              Une vision <em className="italic text-[#7B9E87]">globale</em>
+              <br /> du bien-être animal
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { value: "✦", label: "Approche intuitive", sub: "Communication profonde" },
-              { value: "◈", label: "Cadre familial", sub: "Environnement bienveillant" },
-              { value: "❋", label: "Bien-être total", sub: "Corps, émotions, esprit" },
-              { value: "♡", label: "Lien renforcé", sub: "Maître & animal" },
+              {
+                title: "Présence & Amour",
+                body: "Chaque animal est accueilli comme un membre de la famille, avec toute l'attention et l'affection qu'il mérite.",
+                color: "#7B9E87",
+                symbol: "♥",
+              },
+              {
+                title: "Écoute Intuitive",
+                body: "La communication animale permet de comprendre les besoins profonds, les peurs et les désirs de chaque animal.",
+                color: "#C9A84C",
+                symbol: "◈",
+              },
+              {
+                title: "Équilibre Émotionnel",
+                body: "Les Fleurs de Bach et soins énergétiques rééquilibrent l'état émotionnel pour un bien-être durable.",
+                color: "#5A7A65",
+                symbol: "✦",
+              },
+              {
+                title: "Lien Profond",
+                body: "L'intégration du développement personnel transforme et enrichit la relation unique entre l'humain et l'animal.",
+                color: "#6B5240",
+                symbol: "∞",
+              },
             ].map((item, i) => (
               <div
-                key={item.label}
+                key={i}
                 data-animate
-                className={`delay-${i + 1} space-y-3`}
+                data-delay={`${i * 100 + 100}`}
+                className="text-center group"
               >
-                <span className="text-[#a8c5a0] text-4xl block">{item.value}</span>
-                <p
-                  className="text-[#f7f3ed] text-base"
-                  style={{ fontFamily: "var(--font-cormorant), serif", fontWeight: 400 }}
+                <div
+                  className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-white text-2xl transition-transform duration-500 group-hover:scale-110"
+                  style={{ backgroundColor: item.color }}
                 >
-                  {item.label}
-                </p>
-                <p
-                  className="text-[#7aab70] text-xs tracking-wider uppercase"
-                  style={{ fontFamily: "var(--font-jost), sans-serif", fontWeight: 300 }}
+                  {item.symbol}
+                </div>
+                <h3
+                  className="text-xl font-medium text-[#3D2E1E] mb-3"
+                  style={{ fontFamily: "var(--font-cormorant)" }}
                 >
-                  {item.sub}
+                  {item.title}
+                </h3>
+                <p
+                  className="text-[#6B5240] text-sm leading-relaxed"
+                  style={{ fontFamily: "var(--font-jost)", fontWeight: 300 }}
+                >
+                  {item.body}
                 </p>
               </div>
             ))}
@@ -529,79 +473,51 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════
-          CTA FINAL
-      ═══════════════════════════════════════════ */}
-      <section className="py-28 md:py-40 bg-[#f7f3ed] relative overflow-hidden">
-        {/* Large decorative text */}
-        <div
-          className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden"
-          aria-hidden="true"
-        >
+      {/* ── CTA SECTION ── */}
+      <section className="py-32 bg-[#F5F0E8] relative overflow-hidden">
+        <div className="absolute inset-0 leaf-pattern" />
+        <div className="relative z-10 max-w-3xl mx-auto px-6 text-center">
           <span
-            className="text-[#a8c5a0]/8 font-bold"
-            style={{
-              fontFamily: "var(--font-cormorant), serif",
-              fontSize: "clamp(8rem, 20vw, 18rem)",
-              lineHeight: 1,
-              whiteSpace: "nowrap",
-            }}
+            data-animate
+            className="text-[#7B9E87] tracking-[0.3em] text-xs uppercase"
+            style={{ fontFamily: "var(--font-jost)" }}
           >
-            ensemble
+            Prendre contact
           </span>
-        </div>
+          <h2
+            data-animate data-delay="200"
+            className="text-[clamp(2.5rem,5vw,4rem)] font-light text-[#3D2E1E] mt-4 mb-6 leading-tight"
+            style={{ fontFamily: "var(--font-cormorant)" }}
+          >
+            Votre animal mérite
+            <br />
+            <em className="italic text-[#7B9E87]">le meilleur soin</em>
+          </h2>
 
-        <div className="max-w-3xl mx-auto px-6 text-center relative z-10">
-          <div data-animate className="space-y-8">
-            <p
-              className="text-[#7aab70] text-xs tracking-[0.4em] uppercase"
-              style={{ fontFamily: "var(--font-jost), sans-serif", fontWeight: 400 }}
+          <p
+            data-animate data-delay="300"
+            className="text-[#6B5240] text-lg leading-relaxed mb-10 max-w-xl mx-auto"
+            style={{ fontFamily: "var(--font-jost)", fontWeight: 300 }}
+          >
+            Découvrez comment Julie Decoly peut accompagner votre animal avec 
+            une approche holistique unique, alliant pension familiale et soins 
+            de l'âme.
+          </p>
+
+          <div data-animate data-delay="400" className="flex flex-wrap gap-4 justify-center">
+            <a
+              href="/services"
+              className="group inline-flex items-center gap-3 bg-[#7B9E87] hover:bg-[#5A7A65] text-[#FDFAF5] px-10 py-4 text-sm tracking-widest uppercase transition-all duration-300 shadow-lg hover:shadow-xl"
+              style={{ fontFamily: "var(--font-jost)" }}
             >
-              Commençons l&apos;aventure
-            </p>
-            <h2
-              className="text-[#2d4a2d]"
-              style={{
-                fontFamily: "var(--font-cormorant), serif",
-                fontWeight: 300,
-                fontSize: "clamp(2.5rem, 6vw, 5rem)",
-                lineHeight: 1.1,
-              }}
-            >
-              Prenez soin de votre
-              <br />
-              <em className="text-[#7aab70]">compagnon aujourd&apos;hui</em>
-            </h2>
-            <p
-              className="text-[#5a7a5a] text-base md:text-lg leading-relaxed"
-              style={{ fontFamily: "var(--font-jost), sans-serif", fontWeight: 300 }}
-            >
-              Que ce soit pour une séance de communication, un séjour à la pension ou un soin énergétique, je suis là pour accompagner votre animal avec tout l&apos;amour qu&apos;il mérite.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="https://www.juliedecoly.com/contact"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 bg-[#2d4a2d] text-[#c8ddc4] px-10 py-4 rounded-full hover:bg-[#a8c5a0] hover:text-[#2d4a2d] transition-all duration-500 text-sm tracking-[0.2em] uppercase shadow-xl hover:shadow-2xl"
-                style={{ fontFamily: "var(--font-jost), sans-serif", fontWeight: 500 }}
-              >
-                Contacter Julie
-                <span>→</span>
-              </Link>
-              <Link
-                href="/services"
-                className="inline-flex items-center justify-center gap-2 border-2 border-[#2d4a2d] text-[#2d4a2d] px-10 py-4 rounded-full hover:bg-[#2d4a2d] hover:text-[#c8ddc4] transition-all duration-500 text-sm tracking-[0.2em] uppercase"
-                style={{ fontFamily: "var(--font-jost), sans-serif", fontWeight: 500 }}
-              >
-                Voir les services
-              </Link>
-            </div>
+              Voir les services
+              <span className="group-hover:translate-x-1 transition-transform">→</span>
+            </a>
           </div>
         </div>
       </section>
 
       <Footer />
-    </>
+    </main>
   );
 }
